@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:ms/ms.dart';
+import 'package:millisecs/millisecs.dart';
 
 void main() {
   group('ms(string)', () {

@@ -1,8 +1,14 @@
-# ms
+# millisecs
 
 Converts various time formats to milliseconds and vice versa. Dart & Flutter adaptation of [Vercel's ms npm package](https://github.com/vercel/ms).
 
 ## Usage
+
+### Import
+
+```dart
+import 'package:millisecs/millisecs.dart';
+```
 
 ### Convert from Time Formats
 
@@ -10,11 +16,11 @@ Converts various time formats to milliseconds and vice versa. Dart & Flutter ada
 ms('2 days');  // 172800000
 ms('1d');      // 86400000
 ms('10h');     // 36000000
-ms('2.5 hrs'); // 9000000
+ms('2.5 hrs'); // 9000000.0
 ms('2h');      // 7200000
 ms('1m');      // 60000
 ms('5s');      // 5000
-ms('1y');      // 31557600000
+ms('1y');      // 31557600000.0
 ms('100');     // 100
 ms('-3 days'); // -259200000
 ms('-1h');     // -3600000
@@ -56,8 +62,8 @@ tryFormat(double.infinity);      // null
 ### Extensions
 
 ```dart 
-'2.5 hrs'.parseMS();              // 9000000
-'1y'.parseMS();                   // 31557600000
+'2.5 hrs'.parseMS();              // 9000000.0
+'1y'.parseMS();                   // 31557600000.0
 '100'.parseMS();                  // 100
 '-3 days'.parseMS();              // -259200000
 
@@ -107,13 +113,14 @@ export type StringValue =
   | `${number} ${UnitAnyCase}`;
 ```
 
-Coming over to Dart, as there is no way to achieve the above (to improve types), `ms` simply uses `dynamic`. The code works as expected. You might have to cast the result from `ms` in your Dart code to your desired type (string or num), if `dynamic` wants to be problematic:
+Coming over to Dart, as there is no way to achieve the above (to improve types), `ms` simply uses `dynamic`. The code works as expected. If need be, you might want to interpolate the result from `ms` into a string or cast it to your desired type (string or num):
 
 ```dart
-final toDisplay = ms(24 * 60 * 60 * 1000) as String; // "1d"
+final toDisplay1 = ms(24 * 60 * 60 * 1000) as String; // "1d"
+final toDisplay2 = '${ms(24 * 60 * 60 * 1000)}'; // "1d"
 ```
 
-If you want more type control, use the extensions or the `parse` and `format` functions. If you are not worried about the `dynamic` type, then enjoy `ms` as it is.
+If you want more type control, use the extensions or the `parse` and `format` functions. `parse` takes a String and returns a num, whereas `format` does the opposite (takes a num and returns a String). If you are not worried about the `dynamic` type, then enjoy `ms` as it is.
 
 ### Formatting to weeks and years
 

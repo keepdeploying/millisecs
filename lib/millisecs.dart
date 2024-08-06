@@ -3,7 +3,7 @@
 ///
 /// This is Dart & Flutter adaptation of
 /// [Vercel's ms npm package](https://github.com/vercel/ms).
-library ms;
+library millisecs;
 
 const _s = 1000;
 const _m = _s * 60;
